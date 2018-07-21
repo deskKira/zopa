@@ -99,4 +99,21 @@ public class CreditComputationTest {
     assertEquals(lendersByRate.get(1), res.get(1));
   }
 
+  @Test
+  public void testGetLendersWithMinimalRate1() {
+    List<Lender> lenders = new ArrayList<>();
+    lenders.add(new Lender("Bob", 0.075, 640L));
+    lenders.add(new Lender("Jane", 0.069, 480L));
+    lenders.add(new Lender("Fred", 0.071, 520L));
+    lenders.add(new Lender("Mary", 0.104, 170L));
+    lenders.add(new Lender("John", 0.081, 320L));
+    lenders.add(new Lender("Dave", 0.074, 140L));
+    lenders.add(new Lender("Angela", 0.071, 60L));
+
+    List<Lender> lendersByRate = creditComputation.getLendersByRate.apply(lenders);
+    creditComputation.rateCalculate.apply(lendersByRate);
+    List<Lender> res = creditComputation.getLendersWithMinimalRate(lendersByRate, 1400L);
+    assertEquals(5, res.size());
+  }
+
 }

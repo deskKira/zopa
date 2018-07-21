@@ -18,11 +18,14 @@ public class App {
   private CreditService creditService;
 
   private void checkProgramArguments(String[] args) throws NoSuchFileException {
-    if (StringUtils.isEmpty(args[0])) {
-      throw new IllegalArgumentException("Path to file can't be empty");
+    if (args.length == 0) {
+      throw new IllegalArgumentException("Should be set 2 arguments\nThe first argument is path to file with lenders\nThe second argument is request amount");
     }
-    if (StringUtils.isEmpty(args[1])) {
-      throw new IllegalArgumentException("Credit sum can't be empty");
+    if (args.length > 2) {
+      new IllegalArgumentException("The number of arguments can not exceed 2");
+    }
+    if (args.length == 1) {
+      throw new IllegalArgumentException("Request amount can not be empty");
     }
     if (StringUtils.isNotEmpty(args[0])) {
       String pathStr = args[0];
@@ -39,11 +42,18 @@ public class App {
         Integer creditSum = new Integer(args[1]);
         if (creditSum < 1000) {
           throw new IllegalArgumentException(
-              "Wrong second argument. The argument value should be a digit between £ 1000 до £ 15 000");
+              "Wrong second argument. The argument value should be a digit between £ 1000 до £ 15 000"
+          );
         }
         if (creditSum > 15000) {
           throw new IllegalArgumentException(
-              "Wrong second argument. The argument value should be a digit between £ 1000 до £ 15 000");
+              "Wrong second argument. The argument value should be a digit between £ 1000 до £ 15 000"
+          );
+        }
+        if (creditSum % 100 != 0) {
+          throw new IllegalArgumentException(
+              "Request amount should step increment £100 between £ 1000 до £ 15 000"
+          );
         }
       } else {
         throw new IllegalArgumentException(

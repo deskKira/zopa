@@ -75,9 +75,9 @@ public class CreditComputationTest {
     lenders.add(new Lender("Angela", 0.071, 60L));
 
     List<Lender> lendersByRate = creditComputation.getLendersByRate.apply(lenders);
-    creditComputation.rateCalculate.apply(lendersByRate);
-
-    //TODO
+    List<Lender> lenderListWithMinimalRate = creditComputation.getLendersWithMinimalRate(lendersByRate, 1000L);
+    Double rate = creditComputation.rateCalculate.apply(lenderListWithMinimalRate);
+    assertEquals(new Double(0.070), new Double(new BigDecimal(rate).setScale(2, RoundingMode.HALF_UP).doubleValue()));
   }
 
   @Test

@@ -61,7 +61,42 @@ public class CreditComputationTest {
     assertEquals(lenders.get(0), lendersByRate.get(4));
     assertEquals(lenders.get(4), lendersByRate.get(5));
     assertEquals(lenders.get(3), lendersByRate.get(6));
+  }
 
+  @Test
+  public void testGetRateCalculate() {
+    List<Lender> lenders = new ArrayList<>();
+    lenders.add(new Lender("Bob", 0.075, 640L));
+    lenders.add(new Lender("Jane", 0.069, 480L));
+    lenders.add(new Lender("Fred", 0.071, 520L));
+    lenders.add(new Lender("Mary", 0.104, 170L));
+    lenders.add(new Lender("John", 0.081, 320L));
+    lenders.add(new Lender("Dave", 0.074, 140L));
+    lenders.add(new Lender("Angela", 0.071, 60L));
+
+    List<Lender> lendersByRate = creditComputation.getLendersByRate.apply(lenders);
+    creditComputation.rateCalculate.apply(lendersByRate);
+
+    //TODO
+  }
+
+  @Test
+  public void testGetLendersWithMinimalRate() {
+    List<Lender> lenders = new ArrayList<>();
+    lenders.add(new Lender("Bob", 0.075, 640L));
+    lenders.add(new Lender("Jane", 0.069, 480L));
+    lenders.add(new Lender("Fred", 0.071, 520L));
+    lenders.add(new Lender("Mary", 0.104, 170L));
+    lenders.add(new Lender("John", 0.081, 320L));
+    lenders.add(new Lender("Dave", 0.074, 140L));
+    lenders.add(new Lender("Angela", 0.071, 60L));
+
+    List<Lender> lendersByRate = creditComputation.getLendersByRate.apply(lenders);
+    creditComputation.rateCalculate.apply(lendersByRate);
+    List<Lender> res = creditComputation.getLendersWithMinimalRate(lendersByRate, 1000L);
+    assertEquals(2, res.size());
+    assertEquals(lendersByRate.get(0), res.get(0));
+    assertEquals(lendersByRate.get(1), res.get(1));
   }
 
 }

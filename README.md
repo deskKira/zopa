@@ -16,7 +16,7 @@ lender - some string name;
 rate - some double value of rate;
 available - some available sum on the lender account; 
 
-## For start to do the follow things:
+## To get started follow these steps:
 * To clone the repository: git clone https://github.com/deskKira/zopa.git or click download zip
 * Run the next command: `mvn clean package`. In result you should get the file **credit-1.0-jar-with-dependencies.jar** in target directory of the project
 * Run the command: 
